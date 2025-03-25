@@ -2,10 +2,18 @@ package site.easy.to.build.crm.service.lead;
 
 import site.easy.to.build.crm.entity.Customer;
 import site.easy.to.build.crm.entity.Lead;
+import site.easy.to.build.crm.entity.Ticket;
+import site.easy.to.build.crm.repository.LeadRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-public interface LeadService {
+public interface LeadService { //its an interface
+
+    String updateAmountById(Integer leadId, BigDecimal newAmount);
+    
+    List<Lead> getLeadsByStatus(String status);//added
+
     public Lead findByLeadId(int id);
 
     public List<Lead> findAll();

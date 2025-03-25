@@ -14,6 +14,7 @@ public class DepenseService {
     @Autowired
     private DepenseRepository depenseRepository;
 
+
     public Optional<Depense> findById(Integer id) {
         return depenseRepository.findById(id);
     }

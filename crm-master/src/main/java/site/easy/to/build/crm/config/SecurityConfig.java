@@ -59,7 +59,9 @@ public class SecurityConfig {
 
         http.
                 authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/api/reset").permitAll()  // Allow access without authentication
+                        .requestMatchers("/employee/budget/**").permitAll() 
+                        .requestMatchers("/configAlerte/**").permitAll() 
+                        .requestMatchers("/api/**").permitAll()  
                         .requestMatchers("/register/**").permitAll()
                         .requestMatchers("/set-employee-password/**").permitAll()
                         .requestMatchers("/change-password/**").permitAll()

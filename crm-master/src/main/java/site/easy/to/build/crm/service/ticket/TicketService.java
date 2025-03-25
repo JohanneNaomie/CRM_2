@@ -3,9 +3,15 @@ package site.easy.to.build.crm.service.ticket;
 import site.easy.to.build.crm.entity.Customer;
 import site.easy.to.build.crm.entity.Ticket;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface TicketService {
+
+    String updateAmountById(Integer leadId, BigDecimal newAmount);
+
+    List<Ticket> getTicketsByStatus(String status);//added
+
     public Ticket findByTicketId(int id);
 
     public Ticket save(Ticket ticket);
@@ -18,7 +24,7 @@ public interface TicketService {
 
     public List<Ticket> findAll();
 
-    public List<Ticket> findCustomerTickets(int id);
+    public List<Ticket> findCustomerTickets(int id); //what does this mean 
 
     List<Ticket> getRecentTickets(int managerId, int limit);
 

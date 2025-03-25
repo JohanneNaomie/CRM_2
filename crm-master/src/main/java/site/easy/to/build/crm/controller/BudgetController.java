@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.GeneralSecurityException;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -80,18 +81,53 @@ public class BudgetController {
          try {
              // Get the remaining budget for the customer
              BigDecimal totalRestBigDecimal = budgetService.getRestBudgetByCustomer(customerId); // Convert int to Long
-             double totalRest = totalRestBigDecimal.doubleValue();  
+            //  double totalRest = totalRestBigDecimal.doubleValue();  
+            //  System.out.println("Total Rest Customer:"+customerId+" "+totalRest);
              
              // Return the budget as a JSON response
              Map<String, Object> response = new HashMap<>();
-             response.put("totalRest", totalRest);
+             response.put("totalRest", totalRestBigDecimal);
              return ResponseEntity.ok(response);
          } catch (Exception e) {
+            System.out.println("error budget:" + e.getMessage());
              Map<String, Object> errorResponse = new HashMap<>();
              errorResponse.put("error", "Unable to retrieve budget.");
              return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
          }
      }
+
+    @GetMapping("/getPourcentageReste/{customerId}/{reste}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getPourcentageReste(
+            @PathVariable int customerId, 
+            @PathVariable BigDecimal reste) {
+        try {
+            // Get the total budget for the customer
+            BigDecimal totalBudgetBigDecimal = budgetService.getTotalBudgetByCustomer(customerId);
+
+            // Check if the total budget is zero to avoid division by zero
+            if (totalBudgetBigDecimal.compareTo(BigDecimal.ZERO) == 0) {
+                throw new ArithmeticException("Total budget is zero, cannot calculate percentage.");
+            }
+
+            // Calculate the remaining percentage
+            BigDecimal pourcentageReste = reste.multiply(BigDecimal.valueOf(100))
+                                            .divide(totalBudgetBigDecimal, 2, RoundingMode.HALF_UP);
+
+            // Return the budget as a JSON response
+            Map<String, Object> response = new HashMap<>();
+            response.put("restePourcentage", pourcentageReste);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            System.out.println("Error calculating reste pourcentage: " + e.getMessage());
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Unable to retrieve reste pourcentage.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+
+
+
      
 
 

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div>
+        @await Html.PartialAsync("_Header")
+    </div>
+
+    <!-- NavBar -->
+    <div>
+        @await Html.PartialAsync("_NavBar")
+    </div>
+
+    <!-- Include the message partial view here -->
+    @await Html.PartialAsync("_Message")
+
+    <!-- Dashboard -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <p class="d-inline-block border rounded-pill py-1 px-4">Statistics</p>
+                <h1>Dashboard</h1>
+            </div>
+            <!-- total debut -->
+            <div class="row g-4">
+                
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item bg-light rounded h-100 p-5">
+                        <h4 class="mb-3">Data Customer</h4>
+                        <p class="mb-4">Total: <b>10,000</b></p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item bg-light rounded h-100 p-5">
+                        <h4 class="mb-3">Data Lead</h4>
+                        <p class="mb-4">Total: <b>10,000</b></p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item bg-light rounded h-100 p-5">
+                        <h4 class="mb-3">Data Ticket</h4>
+                        <p class="mb-4">Total: <b>10,000</b></p>
+                    </div>
+                </div>
+            </div>
+            <!-- total fin -->
+            <br>
+            <br>
+            <br>
+            <!-- graph debut  -->
+            <div class="row g-4">
+                
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item bg-light rounded h-100 p-5">
+                        <h4 class="mb-3">Graph 1</h4>
+                        <canvas id="chart1"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item bg-light rounded h-100 p-5">
+                        <h4 class="mb-3">Graph 2</h4>
+                        <canvas id="chart2"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item bg-light rounded h-100 p-5">
+                        <h4 class="mb-3">Graph 3</h4>
+                        <canvas id="chart3"></canvas>
+                    </div>
+                </div>
+
+            </div>
+            <!-- graph fin -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div>
+        @await Html.PartialAsync("_Footer")
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function getRandomColor() {
+            return `hsl(${Math.random() * 360}, 70%, 60%)`; // Generates random pastel colors
+        }
+
+        function generateColors(dataLength) {
+            return Array.from({ length: dataLength }, () => getRandomColor());
+        }
+
+        function createChart(chartId, data) {
+            var ctx = document.getElementById(chartId);
+            if (!ctx) {
+                console.error("Canvas not found:", chartId);
+                return;
+            }
+
+            var labels = Object.keys(data);
+            var values = Object.values(data);
+            var colors = generateColors(values.length);
+
+            new Chart(ctx, {
+                type: 'pie', // You can change to 'bar' or other chart types if needed
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: colors
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        }
+
+        // Parse JSON Data from ViewBag and handle the case where data might be null
+        var chartData1 = @Html.Raw(Json.Serialize(ViewBag.ChartData1 ?? new Dictionary<string, int>()));
+        var chartData2 = @Html.Raw(Json.Serialize(ViewBag.ChartData2 ?? new Dictionary<string, int>()));
+        var chartData3 = @Html.Raw(Json.Serialize(ViewBag.ChartData3 ?? new Dictionary<string, int>()));
+
+        // Create the charts using the data
+        createChart('chart1', chartData1);
+        createChart('chart2', chartData2);
+        createChart('chart3', chartData3);
+    });
+</script>
+
+</body>
+</html>
