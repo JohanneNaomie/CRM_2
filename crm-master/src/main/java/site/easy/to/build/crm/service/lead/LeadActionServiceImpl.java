@@ -17,4 +17,6 @@ public class LeadActionServiceImpl implements LeadActionService{
     public void save(LeadAction leadAction) {
         leadActionRepository.save(leadAction);
     }
+
+    
 }

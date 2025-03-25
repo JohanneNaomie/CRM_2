@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div>
+        @await Html.PartialAsync("_Header")
+    </div>
+
+    <!-- NavBar -->
+    <div>
+        @await Html.PartialAsync("_NavBar")
+    </div>
+
+    <!-- Include the message partial view here -->
+    @await Html.PartialAsync("_Message")
+
+    <!-- Dashboard -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <p class="d-inline-block border rounded-pill py-1 px-4">Details Depenses</p>
+                <h1>Depenses List</h1>
+            </div>
+            <!-- total debut -->
+            <div class="row g-10">
+                <div class="col-lg-10 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <table id="config-table" class="table display table-bordered table-striped no-wrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Type of Transaction</th>
+                                <th>Amount</th>
+                                <th>Customer</th>
+                                <th>Reference ID</th>
+                                <th>Assigned Employee</th>
+                                <th>Edit Amount</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2023-03-01 10:00:00</td>
+                                <td>Lead</td>
+                                <td>$500.00</td>
+                                <td>Mary Johnson</td>
+                                <td>101</td>
+                                <td>Jane Smith</td>
+                                <td>
+                                    <form action="#" method="post">
+                                        <input type="number" class="form-control border-0" placeholder="new amount" name="amount" id="amount">
+                                        <button type="submit" class="fas fa-edit"></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="/employee/depense/delete/1" method="post">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="mdi mdi-delete"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>2023-03-02 14:30:00</td>
+                                <td>Ticket</td>
+                                <td>$300.00</td>
+                                <td>James Williams</td>
+                                <td>102</td>
+                                <td>Mike Lee</td>
+                                <td>
+                                    <form action="#" method="post">
+                                        <input type="number" class="form-control border-0" placeholder="new amount" name="amount" id="amount">
+                                        <button type="submit" class="fas fa-edit"></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="/employee/depense/delete/2" method="post">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="mdi mdi-delete"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>2023-03-03 09:00:00</td>
+                                <td>Lead</td>
+                                <td>$400.00</td>
+                                <td>Robert Davis</td>
+                                <td>103</td>
+                                <td>Susan Taylor</td>
+                                <td>
+                                    <form action="#" method="post">
+                                        <input type="number" class="form-control border-0" placeholder="new amount" name="amount" id="amount">
+                                        <button type="submit" class="fas fa-edit"></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="/employee/depense/delete/3" method="post">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="mdi mdi-delete"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- total fin -->
+            
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div>
+        @await Html.PartialAsync("_Footer")
+    </div>
+
+</body>
+</html>

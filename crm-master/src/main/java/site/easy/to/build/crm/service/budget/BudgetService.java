@@ -15,14 +15,16 @@ public class BudgetService {
 
     @Autowired
     private BudgetRepository budgetRepository;
+    @Autowired
     private DepenseService depenseService;
+
 
     public BigDecimal getRestBudgetByCustomer(int idCustomer) {
         // Get all the budgets for the customer
         List<Budget> budgets = budgetRepository.findByCustomer_CustomerId(idCustomer);
     
         // Get all the depenses for the customer
-        List<Depense> depenses = depenseService.findDepenseByCustomerId(idCustomer);
+        List<Depense> depenses = depenseService.findDepenseByCustomerId(idCustomer); //here
     
         // Calculate the total budget
         BigDecimal totalBudget = BigDecimal.ZERO;
@@ -47,6 +49,18 @@ public class BudgetService {
     public List<Budget> getBudgetsByCustomerId(int customerId) {
         return budgetRepository.findByCustomer_CustomerId(customerId);
     }
+    public BigDecimal getTotalBudgetByCustomer(int idCustomer) {
+
+        List<Budget>budgets= getAllBudgets();
+        // Calculate the total budget
+        BigDecimal totalBudget = BigDecimal.ZERO;
+        for (Budget budget : budgets) {
+            totalBudget = totalBudget.add(budget.getAmount()); // Add each budget's amount
+        }
+        return totalBudget;
+    }
+
+
 
 
     // Method to get all budgets

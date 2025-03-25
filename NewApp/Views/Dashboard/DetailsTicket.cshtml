@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div>
+        @await Html.PartialAsync("_Header")
+    </div>
+
+    <!-- NavBar -->
+    <div>
+        @await Html.PartialAsync("_NavBar")
+    </div>
+
+    <!-- Include the message partial view here -->
+    @await Html.PartialAsync("_Message")
+
+    <!-- Dashboard -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <p class="d-inline-block border rounded-pill py-1 px-4">Details Tickets for this Status</p>
+                <h1>Status 1</h1>
+            </div>
+            <!-- total debut -->
+            <div class="row g-10">
+                <div class="col-lg-10 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <table id="config-table" class="table display table-bordered table-striped no-wrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Subject</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Customer</th>
+                                <th>Assigned Employee</th>
+                                <th>Edit Amount</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Issue with Server</td>
+                                <td>High</td>
+                                <td>In Progress</td>
+                                <td>$500.00</td>
+                                <td>John Doe</td>
+                                <td>Jane Smith</td>
+                                <td>
+                                    <form action="#" method="post">
+                                        <input type="number" class="form-control border-0" placeholder="new amount" name="amount" id="amount">
+                                        <button type="submit" class="fas fa-edit"></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="#" method="post">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="mdi mdi-delete"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Payment Gateway Issue</td>
+                                <td>Medium</td>
+                                <td>Resolved</td>
+                                <td>$200.00</td>
+                                <td>Mary Johnson</td>
+                                <td>Mike Williams</td>
+                                <td>
+                                    <form action="#" method="post">
+                                        <input type="number" class="form-control border-0" placeholder="new amount" name="amount" id="amount">
+                                        <button type="submit" class="fas fa-edit"></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="#" method="post">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="mdi mdi-delete"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Database Connectivity</td>
+                                <td>Low</td>
+                                <td>New</td>
+                                <td>$150.00</td>
+                                <td>David Brown</td>
+                                <td>Susan Lee</td>
+                                <td>
+                                    <form action="#" method="post">
+                                        <input type="number" class="form-control border-0" placeholder="new amount" name="amount" id="amount">
+                                        <button type="submit" class="fas fa-edit"></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="#" method="post">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="mdi mdi-delete"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>                            
+                </div>
+            </div>
+            <!-- total fin -->
+            
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div>
+        @await Html.PartialAsync("_Footer")
+    </div>
+
+
+</body>
+</html>

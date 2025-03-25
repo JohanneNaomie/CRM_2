@@ -40,6 +40,13 @@ public class ResetService {
             "DELETE FROM trigger_contract;",
             "DELETE FROM trigger_ticket;",
             "DELETE FROM trigger_lead;",
+
+            "DELETE FROM budget;",
+            // "DELETE FROM status_budget;",
+            "DELETE FROM depense;",
+            // "DELETE FROM transaction;",
+            
+
             "SET FOREIGN_KEY_CHECKS = 1;",
         };
 

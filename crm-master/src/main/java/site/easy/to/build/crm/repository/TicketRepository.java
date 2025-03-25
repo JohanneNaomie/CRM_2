@@ -4,17 +4,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import site.easy.to.build.crm.entity.Customer;
+import site.easy.to.build.crm.entity.Lead;
 import site.easy.to.build.crm.entity.Ticket;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Integer> {
     public Ticket findByTicketId(int ticketId);
 
+    Optional<Ticket> findByTicketId(Integer ticketId); 
+
     public List<Ticket> findByManagerId(int id);
 
-    
+    public List<Ticket> findByStatus(String status); //added
 
     public List<Ticket> findByEmployeeId(int id);
 

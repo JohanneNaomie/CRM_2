@@ -4,9 +4,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import site.easy.to.build.crm.entity.Customer;
+import site.easy.to.build.crm.entity.Lead;
 import site.easy.to.build.crm.repository.TicketRepository;
 import site.easy.to.build.crm.entity.Ticket;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -18,6 +20,24 @@ public class TicketServiceImpl implements TicketService{
         this.ticketRepository = ticketRepository;
     }
 
+    // Update amount by id
+    public String updateAmountById(Integer ticketId, BigDecimal newAmount) {
+        // Check if the ticket exists
+        Ticket ticket = ticketRepository.findByTicketId(ticketId).orElse(null);
+        if (ticket == null) {
+            return "ticket not found!";
+        }
+
+        // Update the amount
+        ticket.setAmount(newAmount);
+        ticketRepository.save(ticket);  // Save the updated ticket
+        return "ticket amount updated successfully!";
+    }
+
+    @Override
+    public List<Ticket> getTicketsByStatus(String status) { //added
+        return ticketRepository.findByStatus(status);
+    }
     @Override
     public Ticket findByTicketId(int id) {
         return ticketRepository.findByTicketId(id);
